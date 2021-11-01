@@ -6,10 +6,8 @@ const Footer = () => (
 			target='_blank'
 			rel='noopener noreferrer'
 		>
-			Powered by{' '}
-			<img src='/vercel.svg' alt='Vercel Logo' className='h-4 ml-2' />
+			Powered by Eaglestack
 		</a>
-		Made with Love by <a href='https://github.com/chrisclaude'>ChrisClaude</a>
 	</footer>
 );
 
