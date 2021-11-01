@@ -1,11 +1,10 @@
 import * as React from 'react';
+import Callback from '@/auth/components/Callback';
 
-const Callback = () => {
-	return (
-		<div>
-			Callback
-		</div>
-	);
-};
+const CallbackPage = () => (
+	<div>
+		<Callback />
+	</div>
+);
 
-export default Callback;
+export default CallbackPage;

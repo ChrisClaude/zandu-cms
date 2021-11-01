@@ -13,7 +13,7 @@ const config = {
 
 // const mgr = new UserManager(config);
 
-const Login = () => {
+const Index = () => {
 	const [results, setResults] = React.useState('');
 
 	// React.useEffect(() => {
@@ -39,4 +39,4 @@ const Login = () => {
 	);
 };
 
-export default Login;
+export default Index;
