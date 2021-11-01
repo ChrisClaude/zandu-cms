@@ -1,14 +1,15 @@
 import * as React from "react";
 import AuthService from "../services/AuthService";
 
-const AuthContext = React.createContext({
+export const AuthContext = React.createContext({
 	signinRedirectCallback: () => ({}),
 	logout: () => ({}),
 	signoutRedirectCallback: () => ({}),
 	isAuthenticated: () => ({}),
 	signinRedirect: () => ({}),
 	signinSilentCallback: () => ({}),
-	createSigninRequest: () => ({})
+	createSigninRequest: () => ({}),
+	getUser: () => ({}),
 });
 
 AuthContext.displayName = "AuthContext";

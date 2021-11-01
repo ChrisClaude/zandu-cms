@@ -10,7 +10,7 @@ export const IDENTITY_CONFIG = {
 	audience: 'https://example.com', // is there a way to specific the audience when making the jwt                   ¶
 	// responseType: 'id_token token', // (string, default: 'id_token'): The type of response desired from the OIDC provider.
 	response_type: 'code', // (string, default: 'id_token'): The type of response desired from the OIDC provider.
-	// grantType: 'code',
+	grantType: 'code',
 	scope: 'openid profile Zandu.Core', // (string, default: 'openid'): The scope being requested from the OIDC provider.
 	webAuthResponseType: 'id_token token',
 };
