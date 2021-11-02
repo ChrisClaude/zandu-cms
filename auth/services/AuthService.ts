@@ -1,7 +1,8 @@
 import { Log, UserManager, WebStorageStateStore } from 'oidc-client';
+import {AuthContextType} from '@/auth/types';
 import { IDENTITY_CONFIG, METADATA_OIDC } from '../AuthConstant';
 
-export default class AuthService {
+export default class AuthService implements AuthContextType {
 	UserManager;
 
 	constructor() {
@@ -13,32 +14,28 @@ export default class AuthService {
 			},
 		});
 		// Logger
-		Log.logger = console;
-		Log.level = Log.DEBUG;
+		// Log.logger = console;
+		// Log.level = Log.DEBUG;
 		this.UserManager.events.addUserLoaded((user) => {
-			if (window.location.href.indexOf('signin-oidc') !== -1) {
+			if (window.location.href.indexOf('/auth/callback') !== -1) {
 				this.navigateToScreen();
 			}
 		});
 		this.UserManager.events.addSilentRenewError((e) => {
-			console.log('silent renew error', e.message);
+			console.log('---> silent renew error', e.message);
 		});
 
 		this.UserManager.events.addAccessTokenExpired(() => {
-			console.log('token expired');
+			console.log('---> token expired');
 			this.signinSilent();
 		});
 	}
 
 	signinRedirectCallback = () => {
 		this.UserManager.signinRedirectCallback().then((user) => {
-			console.log(user);
 			window.history.replaceState({},
 				window.document.title,
 				window.location.origin + window.location.pathname);
-
-			// window.location = "index.html";
-			console.log(window.location);
 		}).catch((error) => {
 			// this.signinRedirect();
 			console.error(error);
@@ -54,7 +51,7 @@ export default class AuthService {
 		return user;
 	};
 
-	parseJwt = (token) => {
+	parseJwt = (token: string) => {
 		const base64Url = token.split('.')[1];
 		const base64 = base64Url.replace('-', '+').replace('_', '/');
 		return JSON.parse(window.atob(base64));
@@ -68,7 +65,7 @@ export default class AuthService {
 
 
 	navigateToScreen = () => {
-		window.location.replace('/en/dashboard');
+		window.location.replace('/');
 	};
 
 
@@ -80,7 +77,7 @@ export default class AuthService {
 	signinSilent = () => {
 		this.UserManager.signinSilent()
 			.then((user) => {
-				console.log('signed in', user);
+				console.log('---> signed in', user);
 			})
 			.catch((err) => {
 				console.log(err);
