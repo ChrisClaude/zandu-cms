@@ -2,10 +2,10 @@ import Link from 'next/link';
 
 const Header = () => {
 	return (
-		<header>
-			<Link href="/profile">
-				<a className="text-blue-500 cursor-pointer hover:underline">
-				Profile
+		<header className="py-2 h-16 flex items-center bg-blue-700">
+			<Link href="/">
+				<a className="text-white cursor-pointer font-bold ml-4 text-lg">
+				Zandu CMS
 				</a>
 			</Link>
 		</header>

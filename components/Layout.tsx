@@ -1,21 +1,35 @@
 import * as React from 'react';
+import { styled } from '@mui/material/styles';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
 import Header from './Header';
 import Footer from './Footer';
+
 
 type LayoutProp = {
 	children: React.ReactNode;
 };
 
-const Layout = ({ children }: LayoutProp) => {
-	return (
-		<div className="flex flex-col items-center justify-center min-h-screen py-2">
-			<Header />
-			<main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
-				{children}
-			</main>
-			<Footer />
-		</div>
-	);
-};
+const Item = styled(Paper)(({ theme }) => ({
+	...theme.typography.body2,
+	color: theme.palette.text.secondary,
+	borderRadius:  0
+}));
+
+const Layout = ({ children }: LayoutProp) => (<>
+	<Grid container className="h-screen">
+		<Grid item xs={2} className="h-full">
+			<Item className="h-full overflow-auto flex flex-col bg-gray-800 rounded-none">
+				<Header />
+				<Footer className="mt-auto" />
+			</Item>
+		</Grid>
+		<Grid item xs={10} className="h-full">
+			<Item className="h-full overflow-auto rounded-none">{children}</Item>
+		</Grid>
+	</Grid>
+</>
+);
+
 
 export default Layout;
