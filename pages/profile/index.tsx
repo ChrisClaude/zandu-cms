@@ -1,14 +1,26 @@
 import * as React from 'react';
+import { useEffect } from 'react';
 import Layout from '@/components/Layout';
 import PrivateRoute from '@/auth/components/PrivateRoute';
 import Meta from '@/components/Meta';
 import { Button } from '@mui/material';
 import { AuthContext } from '@/auth/providers/AuthProvider';
+import NavBar from '@/components/NavBar';
+import ProfileMenuItem from '@/components/ProfileMenuItem';
 
 const Profile = () => {
-	const {getUser} = React.useContext(AuthContext);
+	const {getUser, parseJwt} = React.useContext(AuthContext);
+	const [user, setUser] = React.useState({});
+
+	useEffect(() => {
+		async function getCurrentUser() {
+			setUser(await getUser());
+		}
+
+		getCurrentUser();
+	}, []);
+
 	const handleCallAPI = async () => {
-		const user = await getUser();
 		fetch(`${process.env.NEXT_PUBLIC_ZANDU_CORE_ROOT_URL}/identity`, {
 			headers: {
 				'Content-Type': 'application/json',
@@ -21,8 +33,14 @@ const Profile = () => {
 	return (
 		<PrivateRoute Component={() => <Layout>
 			<Meta title='Zandu CMS - Profile' />
-			<div>
+			<NavBar>
+				<ProfileMenuItem />
+			</NavBar>
+			<div className="px-8 py-10">
 				<p>Profile</p>
+				<div className="overflow-auto w-full">
+					  Name: <span>{parseJwt(user.id_token).name}</span>
+				</div>
 				<Button variant='contained' onClick={handleCallAPI}>Call API</Button>
 			</div>
 		</Layout>} />
