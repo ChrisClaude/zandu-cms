@@ -28,9 +28,9 @@
       "@/auth/*": [
         "auth/*"
       ],
-//			"@/helpers/*": [
-//				"helpers/*"
-//			],
+			"@/helpers/*": [
+				"helpers/*"
+			],
       "@mui/styled-engine": [
         "./node_modules/@mui/styled-engine-sc"
       ]
