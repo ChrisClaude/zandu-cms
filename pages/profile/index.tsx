@@ -10,8 +10,8 @@ import ProfileMenuItem from '@/components/ProfileMenuItem';
 
 const Profile = () => {
 	const {getUser, parseJwt} = React.useContext(AuthContext);
-	const [user, setUser] = React.useState({});
-	const [parsedUser, setParsedUser] = React.useState({});
+	const [user, setUser] = React.useState<{} | any>({});
+	const [parsedUser, setParsedUser] = React.useState<{} | any>({});
 
 	useEffect(() => {
 		async function getCurrentUser() {
