@@ -3,11 +3,10 @@ import Button from '@mui/material/Button';
 import { Avatar } from '@mui/material';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 const ProfileMenuItem = () => {
 	const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-	const router = useRouter();
 	const open = Boolean(anchorEl);
 	const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
 		setAnchorEl(event.currentTarget);
@@ -36,10 +35,11 @@ const ProfileMenuItem = () => {
 					'aria-labelledby': 'basic-button',
 				}}
 			>
-				<MenuItem onClick={() => {
-					handleClose();
-					router.push('/profile');
-				} }>Profile</MenuItem>
+				<Link href="/profile">
+					<a>
+						<MenuItem onClick={handleClose}>Profile</MenuItem>
+					</a>
+				</Link>
 				<MenuItem onClick={handleClose}>My account</MenuItem>
 				<MenuItem onClick={handleClose}>Logout</MenuItem>
 			</Menu>

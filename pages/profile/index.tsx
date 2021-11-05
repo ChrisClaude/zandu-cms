@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { useEffect } from 'react';
+import { Button } from '@mui/material';
 import Layout from '@/components/Layout';
 import PrivateRoute from '@/auth/components/PrivateRoute';
 import Meta from '@/components/Meta';
-import { Button } from '@mui/material';
 import { AuthContext } from '@/auth/providers/AuthProvider';
 import NavBar from '@/components/NavBar';
 import ProfileMenuItem from '@/components/ProfileMenuItem';
@@ -11,10 +11,14 @@ import ProfileMenuItem from '@/components/ProfileMenuItem';
 const Profile = () => {
 	const {getUser, parseJwt} = React.useContext(AuthContext);
 	const [user, setUser] = React.useState({});
+	const [parsedUser, setParsedUser] = React.useState({});
 
 	useEffect(() => {
 		async function getCurrentUser() {
-			setUser(await getUser());
+			getUser().then(res => {
+				setUser(res);
+				setParsedUser(parseJwt(res.access_token));
+			});
 		}
 
 		getCurrentUser();
@@ -39,7 +43,10 @@ const Profile = () => {
 			<div className="px-8 py-10">
 				<p>Profile</p>
 				<div className="overflow-auto w-full">
-					  Name: <span>{parseJwt(user.id_token).name}</span>
+					  Name: <span>{parsedUser.name}</span>
+					<pre>
+						{JSON.stringify(parsedUser)}
+					</pre>
 				</div>
 				<Button variant='contained' onClick={handleCallAPI}>Call API</Button>
 			</div>
