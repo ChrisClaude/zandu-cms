@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { useRouter } from 'next/router';
 import AddIcon from '@mui/icons-material/Add';
+import Button from '@mui/material/Button';
 import Meta from '@/components/Meta';
 import NavBar from '@/components/NavBar';
 import ProfileMenuItem from '@/components/ProfileMenuItem';
 import Layout from '@/components/Layout';
 import { capitalizeFirstLetter } from '@/helpers/index';
-import Button from '@mui/material/Button';
 
 const ContentTypes = () => {
 	const router = useRouter();

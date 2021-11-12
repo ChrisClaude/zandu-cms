@@ -21,7 +21,7 @@ const SideBarMenu = (props: SideBarProps) => <aside {...props} className={cn('te
 				</ListItemIcon>
 			</ListItemButton>
 		</ListItem>
-		<Link href='contenttypes/users'>
+		<Link href='/contenttypes/users'>
 			<a>
 				<ListItem disablePadding className='hover:border-l-2 hover:border-blue-700 transition-all'>
 					<ListItemButton>

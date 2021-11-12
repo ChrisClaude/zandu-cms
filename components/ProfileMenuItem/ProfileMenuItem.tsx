@@ -4,8 +4,10 @@ import { Avatar } from '@mui/material';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Link from 'next/link';
+import { AuthContext } from '@/auth/providers/AuthProvider';
 
 const ProfileMenuItem = () => {
+	const {logout} = React.useContext(AuthContext);
 	const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 	const open = Boolean(anchorEl);
 	const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -41,7 +43,7 @@ const ProfileMenuItem = () => {
 					</a>
 				</Link>
 				<MenuItem onClick={handleClose}>My account</MenuItem>
-				<MenuItem onClick={handleClose}>Logout</MenuItem>
+				<MenuItem onClick={logout}>Logout</MenuItem>
 			</Menu>
 		</div>);
 };
